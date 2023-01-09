@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HelloWorldController;
+use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\MemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +21,10 @@ Route::get('/', function () {
 });
 
 Route::get('/hello', function () {
+    $bugsang = config('services.bugsang.key');
+
+    var_dump($bugsang);
+
     return view('welcome');
 });
 
@@ -25,9 +32,11 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
-Route::get('/helloworld', function () {
-    return view('helloworld');
-});
+// Route::get('/helloworld', function () {
+//     return view('helloworld');
+// });
+
+Route::get('/helloworld', [HelloWorldController::class, 'index']);
 
 Route::get('/travellist', function () {
     return view('travellist');
@@ -36,3 +45,18 @@ Route::get('/travellist', function () {
 Route::get('/kirameiger', function () {
     return view('kirameiger');
 });
+
+Route::get('/orders', [OrdersController::class, 'store']);
+
+Route::any('/kirameiger/{id}/{var}', function () {
+    return view('kirameiger');
+})
+->where('id', '[0-9]+')
+->where('var', '[A-Za-z]+');
+
+Route::match(['get', 'post'], '/kirameiger/{id}', function () {
+    return view('kirameiger');
+});
+
+Route::get('/members/{id}', [MemberController::class, 'show'])->name('members.show');
+

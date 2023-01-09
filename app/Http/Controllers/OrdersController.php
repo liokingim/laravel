@@ -9,11 +9,13 @@ class OrdersController extends Controller
     //
     public function store(Request $request)
     {
-        if($request->status == config('const.orders.recept')){
-            // 処理
-        }
+var_dump($request);
+
+        // if($request->status == config('const.orders.recept')){
+        //     // 処理
+        // }
 
         // insert
-        User::create(['status' => config('const.orders.recept')]);
+        //User::create(['status' => config('const.orders.recept')]);
     }
 }
