@@ -32,3 +32,7 @@ Route::get('/helloworld', function () {
 Route::get('/travellist', function () {
     return view('travellist');
 });
+
+Route::get('/kirameiger', function () {
+    return view('kirameiger');
+});
