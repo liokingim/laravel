@@ -29,4 +29,12 @@ class CookieController extends Controller
 
         // ...
     }
+
+    public function setCookie()
+    {
+        $response = new Response('Hello, World!');
+        $response->withCookie(cookie('name', 'value', $minutes = 60));
+
+        return $response;
+    }
 }

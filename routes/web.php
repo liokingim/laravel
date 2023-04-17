@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HelloWorldController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\MemberController;
+use Illuminate\Http\Response;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,3 +61,17 @@ Route::match(['get', 'post'], '/kirameiger/{id}', function () {
 
 Route::get('/members/{id}', [MemberController::class, 'show'])->name('members.show');
 
+Route::get('/set-cookie', function () {
+    $response = new Response('Hello, World!');
+    $response->withCookie(cookie('name', 'value', $minutes = 60));
+
+    return $response;
+});
+
+// header('Set-Cookie: PHPSESSID=WillThisWork?'); 를 처리하는 방법
+Route::get('/set-custom-session-cookie', function () {
+    $response = new Response('Hello, World!');
+    $response->withCookie(cookie('PHPSESSID', 'WillThisWork?', $minutes = 60));
+
+    return $response;
+});
